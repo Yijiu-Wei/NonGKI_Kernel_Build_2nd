@@ -119,6 +119,10 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/device_kernel/
           cp arch/arm64/configs/vendor/xiaomi/munch.config arch/arm64/configs/munch_defconfig
+          mkdir -p include/linux
+          echo "#ifndef _LINUX_SUSFS_H" > include/linux/susfs.h
+          echo "#define _LINUX_SUSFS_H" >> include/linux/susfs.h
+          echo "#endif" >> include/linux/susfs.h
 
       - name: 🧰 Patch Kernel of Re:Kernel
         uses: ./.github/workflows/patch-rekernel
