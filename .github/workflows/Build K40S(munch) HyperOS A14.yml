@@ -15,7 +15,7 @@ env:
   KERNEL_SOURCE : "https://github.com/yspbwx2010/kernel_xiaomi_sm8250_mod"
   KERNEL_BRANCH : "android14-lineage22-mod"
 
-  CLANG_SOURCE : "https://github.com/ZyCromerZ/Clang/releases/download/19.1.7-20250214/Clang-19.1.7-20250214.tar.gz"
+  CLANG_SOURCE : "https://github.com/ZyCromerZ/Clang/releases/download/23.0.0git-20260130-release/Clang-23.0.0git-20260130.tar.gz"
   CLANG_BRANCH : ""
 
   GCC_GNU : false
