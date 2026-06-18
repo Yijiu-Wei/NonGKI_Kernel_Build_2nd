@@ -15,7 +15,7 @@ env:
   KERNEL_SOURCE : "https://github.com/crdroidandroid/android_kernel_xiaomi_sm8250-munch"
   KERNEL_BRANCH : "14.0"
 
-  CLANG_SOURCE : "https://github.com/ZyCromerZ/Clang/releases/download/23.0.0git-20260130-release/Clang-23.0.0git-20260130.tar.gz"
+  CLANG_SOURCE : "https://github.com/ZyCromerZ/Clang/releases/download/20.0.0-20250601/Clang-20.0.0-20250601.tar.gz"
   CLANG_BRANCH : ""
 
   GCC_GNU : false
@@ -32,7 +32,7 @@ env:
   KERNELSU_SOURCE : ""
   KERNELSU_BRANCH : ""
 
-  KERNELSU_AUTO_GET : "false" # if u want easy setting kernelsu, u can true.
+  KERNELSU_AUTO_GET : "true" # if u want easy setting kernelsu, u can true.
   KERNELSU_AUTO_FORK : "sukisu" # magic, rsuntk, next, resukisu and sukisu
 
   SUSFS_ENABLE : false
