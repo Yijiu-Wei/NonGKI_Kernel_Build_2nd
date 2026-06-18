@@ -32,7 +32,7 @@ env:
   KERNELSU_SOURCE : ""
   KERNELSU_BRANCH : ""
 
-  KERNELSU_AUTO_GET : "true" # if u want easy setting kernelsu, u can true.
+  KERNELSU_AUTO_GET : "flase" # if u want easy setting kernelsu, u can true.
   KERNELSU_AUTO_FORK : "sukisu" # magic, rsuntk, next, resukisu and sukisu
 
   SUSFS_ENABLE : flase
@@ -119,11 +119,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/device_kernel/
           cp arch/arm64/configs/vendor/xiaomi/munch.config arch/arm64/configs/munch_defconfig
-          mkdir -p include/linux
-          echo "#ifndef _LINUX_SUSFS_H" > include/linux/susfs.h
-          echo "#define _LINUX_SUSFS_H" >> include/linux/susfs.h
-          echo "#endif" >> include/linux/susfs.h
-
+         
       - name: 🧰 Patch Kernel of Re:Kernel
         uses: ./.github/workflows/patch-rekernel
 
