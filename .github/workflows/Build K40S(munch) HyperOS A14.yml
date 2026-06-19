@@ -131,7 +131,6 @@ jobs:
 
       - name: 💾 Setup Swap Space (Fix OOM)
 
-      - name: 💾 Setup Swap Space (Fix OOM)
         shell: bash
         run: |
           sudo swapoff /swapfile 2>/dev/null || true
