@@ -12,11 +12,11 @@ env:
   CUSTOM_CMDS : "CLANG_TRIPLE=aarch64-linux-gnu-"
   EXTRA_CMDS : "LD=ld.lld LLVM=1 LLVM_IAS=1"
 
-  KERNEL_SOURCE : "https://github.com/crdroidandroid/android_kernel_xiaomi_sm8250-munch"
-  KERNEL_BRANCH : "14.0"
+  KERNEL_SOURCE : "https://github.com/candyceline/kernel_xiaomi_munch.git"
+  KERNEL_BRANCH : "Exclusive"
 
-  CLANG_SOURCE : "https://github.com/ZyCromerZ/Clang/releases/download/20.0.0-20250601/Clang-20.0.0-20250601.tar.gz"
-  CLANG_BRANCH : ""
+  CLANG_SOURCE : "https://github.com/ZyCromerZ/Clang.git"
+  CLANG_BRANCH : "19.0.0git-20240614"
 
   GCC_GNU : false
   GCC_64_SOURCE : "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git"
@@ -35,7 +35,7 @@ env:
   KERNELSU_AUTO_GET : "true" # if u want easy setting kernelsu, u can true.
   KERNELSU_AUTO_FORK : "sukisu" # magic, rsuntk, next, resukisu and sukisu
 
-  SUSFS_ENABLE : false
+  SUSFS_ENABLE : true 
   SUSFS_FIXED : false
 
   AK3_SOURCE : "https://github.com/osm0sis/AnyKernel3.git"
@@ -115,10 +115,10 @@ jobs:
         uses: ./.github/workflows/patch-no-kprobe
 
       - name: 🪛 Extra Kernel Options
-        shell: bash
         run: |
-          cd $GITHUB_WORKSPACE/device_kernel/
-          cp arch/arm64/configs/vendor/xiaomi/munch.config arch/arm64/configs/munch_defconfig
+          # Only ${{ env.DEVICE_NAME }} use it.
+          cd $GITHUB_WORKSPACE/device_kernel
+          # Nothing
          
       - name: 🧰 Patch Kernel of Re:Kernel
         uses: ./.github/workflows/patch-rekernel
