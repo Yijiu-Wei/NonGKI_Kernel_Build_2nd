@@ -130,7 +130,6 @@ jobs:
         uses: ./.github/workflows/patch-baseband-guard
 
       - name: 💾 Setup Swap Space (Fix OOM)
-
         shell: bash
         run: |
           sudo swapoff /swapfile 2>/dev/null || true
