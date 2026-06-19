@@ -50,12 +50,12 @@ runs:
             echo "========================"
             echo "=Read Defconfig (Clang)="
             echo "========================"
-            make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.DEFCONFIG_NAME }}
+          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.DEFCONFIG_NAME }}
           else
             echo "================"
             echo "=Read Defconfig="
             echo "================"
-            make O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.DEFCONFIG_NAME }}
+          make O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.DEFCONFIG_NAME }}
           fi
 
           # ========================================
@@ -75,12 +75,12 @@ runs:
           else
             echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
           fi
-make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
+          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
           else
             echo "========================="
             echo "=olddefconfig for NEW options="
             echo "========================="
-                      if grep -q "LITTLE_CPU_MASK" out/.config 2>/dev/null; then
+          if grep -q "LITTLE_CPU_MASK" out/.config 2>/dev/null; then
             echo "LITTLE_CPU_MASK already in .config"
           else
             echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
@@ -100,12 +100,12 @@ make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }
                 echo "==============================="
                 echo "=Execuate olddefconfig (Clang)="
                 echo "==============================="
-                make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
+          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
             else
                 echo "======================="
                 echo "=Execuate olddefconfig="
                 echo "======================="
-                make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
+          make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
             fi
           fi
 
@@ -118,12 +118,12 @@ make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }
                 echo "==============================="
                 echo "=Execuate olddefconfig (Clang)="
                 echo "==============================="
-                make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
+          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
             else
                 echo "======================="
                 echo "=Execuate olddefconfig="
                 echo "======================="
-                make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
+          make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
             fi
           fi
 
@@ -149,22 +149,22 @@ make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }
             echo "======================"
 
             if [[ "${{ env.BASEBAND_GUARD_ENABLE }}" == "true" ]]; then
-                make -j$(nproc --all) CC="ccache clang" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
+          make -j$(nproc --all) CC="ccache clang" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
                 echo "[+] Pre-built SELinux done."
             fi
 
-            make -j$(nproc --all) CC="ccache clang" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} O=out ARCH="${{ env.KERNEL_ARCH }}" 2>&1|tee error.log
+          make -j$(nproc --all) CC="ccache clang" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} O=out ARCH="${{ env.KERNEL_ARCH }}" 2>&1|tee error.log
           else
             echo "===================="
             echo "=Execuate GCC Build="
             echo "===================="
 
             if [[ "${{ env.BASEBAND_GUARD_ENABLE }}" == "true" ]]; then
-                make -j$(nproc --all) O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
+          make -j$(nproc --all) O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
                 echo "[+] Pre-built SELinux done."
             fi
 
-            make -j$(nproc --all) O=out ARCH="${{ env.KERNEL_ARCH }}" 2>&1|tee error.log
+          make -j$(nproc --all) O=out ARCH="${{ env.KERNEL_ARCH }}" 2>&1|tee error.log
           fi
           }
 
