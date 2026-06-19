@@ -13,7 +13,7 @@ env:
   EXTRA_CMDS : "LD=ld.lld LLVM=1 LLVM_IAS=1"
 
   KERNEL_SOURCE : "https://github.com/HuberyBrook/kernel_xiaomi_sm8250_mod"
-  KERNEL_BRANCH : " android14-lineage22-mod"
+  KERNEL_BRANCH : "android14-lineage22-mod"
 
   CLANG_SOURCE : "https://github.com/ZyCromerZ/Clang.git"
   CLANG_BRANCH : "19.0.0git-20240614"
