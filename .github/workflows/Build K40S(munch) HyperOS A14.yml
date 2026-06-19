@@ -129,6 +129,15 @@ jobs:
       - name: 🔒 Patch Kernel of Baseband Guard
         uses: ./.github/workflows/patch-baseband-guard
 
+      - name: 💾 Setup Swap Space (Fix OOM)
+        shell: bash
+        run: |
+          sudo fallocate -l 4G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h | grep Swap
+
       - name: 🚀 Build Process
         uses: ./.github/workflows/build-process
 
