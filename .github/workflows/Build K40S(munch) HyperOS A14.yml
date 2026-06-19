@@ -138,6 +138,14 @@ jobs:
           sudo swapon /swapfile
           free -h | grep Swap
 
+        shell: bash
+        run: |
+          sudo fallocate -l 4G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          free -h | grep Swap
+
       - name: 🚀 Build Process
         uses: ./.github/workflows/build-process
 
@@ -146,4 +154,3 @@ jobs:
 
       - name: ✏️ Upload Artifacts
         uses: ./.github/workflows/upload-files
-      - name: 💾 Setup Swap Space (Fix OOM)
