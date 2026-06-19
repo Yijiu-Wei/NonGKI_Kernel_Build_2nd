@@ -85,7 +85,7 @@ make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }
           else
             echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
           fi
-make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
+          make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
           fi
 
           if [[ "${{ env.BUILD_OTHER_CONFIG }}"  == "true" ]]; then
