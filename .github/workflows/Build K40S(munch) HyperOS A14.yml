@@ -130,9 +130,13 @@ jobs:
         uses: ./.github/workflows/patch-baseband-guard
 
       - name: 💾 Setup Swap Space (Fix OOM)
+
+      - name: 💾 Setup Swap Space (Fix OOM)
         shell: bash
         run: |
-          sudo fallocate -l 4G /swapfile
+          sudo swapoff /swapfile 2>/dev/null || true
+          sudo rm -f /swapfile
+          sudo dd if=/dev/zero of=/swapfile bs=1M count=4096 status=progress
           sudo chmod 600 /swapfile
           sudo mkswap /swapfile
           sudo swapon /swapfile
