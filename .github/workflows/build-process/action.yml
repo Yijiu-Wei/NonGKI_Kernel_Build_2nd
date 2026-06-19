@@ -77,11 +77,8 @@ runs:
             echo "========================="
             echo "=olddefconfig for NEW options="
             echo "========================="
-          if grep -q "LITTLE_CPU_MASK" out/.config 2>/dev/null; then
-            echo "LITTLE_CPU_MASK already in .config"
-          else
-            echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
-          fi
+          sed -i '/LITTLE_CPU_MASK/d' out/.config
+          echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
           make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
           fi
 
