@@ -69,6 +69,14 @@ runs:
             cp /tmp/Patches/Patch/susfs_patch_to_${{ env.KERNEL_VERSION }}.patch ./
 
             patch -p1 < susfs_patch_to_${{ env.KERNEL_VERSION }}.patch || true
+            echo "[+] Checking fdinfo.c for patch errors..."
+            if [ -f "fs/notify/fdinfo.c.rej" ]; then
+              echo "[-] fdinfo.c patch failed, restoring original..."
+              git checkout -- fs/notify/fdinfo.c 2>/dev/null || true
+            fi
+            if [ -f "fs/notify/fdinfo.c.orig" ]; then
+              rm -f fs/notify/fdinfo.c.orig
+            fi
             echo "[+] SuSFS Patch completed."
           fi
 
