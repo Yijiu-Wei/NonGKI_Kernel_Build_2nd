@@ -50,8 +50,7 @@ runs:
             echo "========================"
             echo "=Read Defconfig (Clang)="
             echo "========================"
-                    sed -i "/CONFIG_KSU_SUSFS/d" arch/${{ env.KERNEL_ARCH }}/configs/${{ env.DEFCONFIG_NAME }}
-          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.DEFCONFIG_NAME }}
+                    make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} ${{ env.DEFCONFIG_NAME }}
           else
             echo "================"
             echo "=Read Defconfig="
@@ -188,8 +187,7 @@ runs:
             echo "======================"
             echo "=Execuate Clang Build="
             echo "======================"
-            sed -i "/CONFIG_KSU_SUSFS/d" out/.config 2>/dev/null || true
-            echo "CONFIG_KSU_SUSFS=n" >> out/.config
+
 
             if [[ "${{ env.BASEBAND_GUARD_ENABLE }}" == "true" ]]; then
           make -j$(nproc --all) CC="ccache clang" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
@@ -201,8 +199,7 @@ runs:
             echo "===================="
             echo "=Execuate GCC Build="
             echo "===================="
-            sed -i "/CONFIG_KSU_SUSFS/d" out/.config 2>/dev/null || true
-            echo "CONFIG_KSU_SUSFS=n" >> out/.config
+
 
             if [[ "${{ env.BASEBAND_GUARD_ENABLE }}" == "true" ]]; then
           make -j$(nproc --all) O=out ARCH="${{ env.KERNEL_ARCH }}" security/selinux/
