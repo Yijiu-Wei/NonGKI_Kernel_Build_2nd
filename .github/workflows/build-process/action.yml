@@ -67,12 +67,25 @@ runs:
             echo "================================="
             echo "=olddefconfig for NEW options (Clang)="
             echo "================================="
-            make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
+                      # ========================================
+          # Fix: LITTLE_CPU_MASK new option without default
+          # ========================================
+          if grep -q "LITTLE_CPU_MASK" out/.config 2>/dev/null; then
+            echo "LITTLE_CPU_MASK already in .config"
+          else
+            echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
+          fi
+make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
           else
             echo "========================="
             echo "=olddefconfig for NEW options="
             echo "========================="
-            make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
+                      if grep -q "LITTLE_CPU_MASK" out/.config 2>/dev/null; then
+            echo "LITTLE_CPU_MASK already in .config"
+          else
+            echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
+          fi
+make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
           fi
 
           if [[ "${{ env.BUILD_OTHER_CONFIG }}"  == "true" ]]; then
