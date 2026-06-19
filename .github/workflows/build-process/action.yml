@@ -68,18 +68,17 @@ runs:
             echo "=olddefconfig for NEW options (Clang)="
             echo "================================="
                       # ========================================
-          # Fix: LITTLE_CPU_MASK new option without default
+          # Fix: accept defaults for all NEW Kconfig options
+          # (LITTLE_CPU_MASK, BIG_CPU_MASK, etc.)
           # ========================================
-          sed -i '/LITTLE_CPU_MASK/d' out/.config
-          echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
-          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
+          yes "" |
+          yes "" | make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
           else
             echo "========================="
             echo "=olddefconfig for NEW options="
             echo "========================="
-          sed -i '/LITTLE_CPU_MASK/d' out/.config
-          echo "CONFIG_LITTLE_CPU_MASK=0" >> out/.config
-          make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
+
+          yes "" | make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
           fi
 
           if [[ "${{ env.BUILD_OTHER_CONFIG }}"  == "true" ]]; then
@@ -94,12 +93,12 @@ runs:
                 echo "==============================="
                 echo "=Execuate olddefconfig (Clang)="
                 echo "==============================="
-          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
+          yes "" | make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
             else
                 echo "======================="
                 echo "=Execuate olddefconfig="
                 echo "======================="
-          make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
+          yes "" | make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
             fi
           fi
 
@@ -112,12 +111,12 @@ runs:
                 echo "==============================="
                 echo "=Execuate olddefconfig (Clang)="
                 echo "==============================="
-          make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
+          yes "" | make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
             else
                 echo "======================="
                 echo "=Execuate olddefconfig="
                 echo "======================="
-          make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
+          yes "" | make O=out ARCH="${{ env.KERNEL_ARCH }}" olddefconfig
             fi
           fi
 
