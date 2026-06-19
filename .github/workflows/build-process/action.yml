@@ -71,7 +71,6 @@ runs:
           # Fix: accept defaults for all NEW Kconfig options
           # (LITTLE_CPU_MASK, BIG_CPU_MASK, etc.)
           # ========================================
-          yes "" |
           yes "" | make CC="ccache clang" O=out ARCH="${{ env.KERNEL_ARCH }}" ${{ env.CUSTOM_CMDS }} ${{ env.EXTRA_CMDS }} olddefconfig
           else
             echo "========================="
